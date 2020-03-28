@@ -1,0 +1,36 @@
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="./LevelSelector.css">
+    <script type="text/javascript" src="../modules/helpers.js"></script>
+    <script>
+        function onLoaded() {
+            var yearLevel = getQueryStringValue("Level").substring(4,5);
+            storeYearLevel(yearLevel);
+            document.getElementById("yearlevel").innerHTML = "Year " + yearLevel;
+        }
+
+        function getQueryStringValue(key) {  
+            return decodeURIComponent(window.location.search.replace(new RegExp("^(?:.*[&\\?]" + encodeURIComponent(key).replace(/[\.\+\*]/g, "\\$&") + "(?:\\=([^&]*))?)?.*$", "i"), "$1"));  
+        }
+    </script>
+</head>
+
+<body class="body" onload="onLoaded()">
+
+        <div class="yearlevel">
+            <div id="yearlevel" class="yearleveltext">
+                Year
+            </div>
+        </div>
+
+        <div class="title">
+            <div id="title" class="titletext">
+                Select Level
+            </div>
+        </div>
+
+</body>
+
+</html>

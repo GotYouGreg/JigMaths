@@ -1,0 +1,75 @@
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="./index.css">
+    <script type="text/javascript" src="./modules/helpers.js"></script>
+    <script>
+
+        function onLoaded() {
+            var yearLevel = getYearLevel();
+            alert("Year Level: " + yearLevel);
+        }
+
+        function startButtonClicked(button) {
+            window.location.href = "./pages/LevelSelector.html" + "?Level=" + button.id;
+        }
+    </script>
+</head>
+
+<body class="body" onload="onLoaded()">
+
+    <div class="examplePiece1">
+        <img src="./images/Example peice 1.png" class="image" style="width:100%">
+    </div>
+
+    <div class="examplePiece2">
+        <img src="./images/Example peice 2.png" class="image" style="width:100%">
+    </div>
+
+    <div class="examplePiece3">
+        <img src="./images/Example peice 3.png" class="image" style="width:100%">
+    </div>
+
+    <div class="examplePiece4">
+        <img src="./images/Example peice 4.png" class="image" style="width:100%">
+    </div>
+
+    <div class="examplePiece5">
+        <img src="./images/Example peice 5.png" class="image" style="width:100%">
+    </div>
+
+    <div class="examplePiece6">
+        <img src="./images/Example peice 6.png" class="image" style="width:100%">
+    </div>
+
+    <div class="year4">
+        <img src="./images/Year 4 button.png" alt="Play for Year 4" class="image" style="width:100%">
+        <div id="year4" onclick="startButtonClicked(this);" class="middle">
+            <div class="text">Play Year 4</div>
+        </div>
+    </div>
+
+    <div class="year5">
+        <img src="./images/Year 5 button.png" alt="Play for Year 5" class="image" style="width:100%">
+        <div id="year5" onclick="startButtonClicked(this);" class="middle">
+            <div class="text">Play Year 5</div>
+        </div>
+    </div>
+
+    <div class="year6">
+        <img src="./images/Year 6 button.png" alt="Play for Year 6" class="image" style="width:100%">
+        <div id="year6" onclick="startButtonClicked(this);" class="middle">
+            <div class="text">Play Year 6</div>
+        </div>
+    </div>
+
+    <div class="title">
+        <div class="titletext">
+            Jig Math
+        </div>
+    </div>
+
+</body>
+
+</html>
