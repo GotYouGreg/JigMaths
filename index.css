@@ -160,3 +160,22 @@ body {
     
     color: #AB5942;
 }
+
+.helptext {
+    position: absolute;
+    width: 85px;
+    height: 71px;
+    left: 0px;
+    top: 0px;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 64px;
+    line-height: 75px;
+    text-align: center;
+
+    /* text colouring */
+
+    color: #522E24;
+    cursor: pointer;
+}
