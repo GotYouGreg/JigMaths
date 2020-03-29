@@ -8,12 +8,17 @@
 
         function onLoaded() {
             var yearLevel = getYearLevel();
-            alert("Year Level: " + yearLevel);
+            //alert("Year Level: " + yearLevel);
         }
 
         function startButtonClicked(button) {
             window.location.href = "./pages/LevelSelector.html" + "?Level=" + button.id;
         }
+
+        function helpButtonClicked() {
+            window.location.href = "./pages/Help.html"
+        }
+
     </script>
 </head>
 
@@ -68,6 +73,10 @@
         <div class="titletext">
             Jig Maths
         </div>
+    </div>
+
+    <div class="helptext" onclick="helpButtonClicked()">
+        ?
     </div>
 
 </body>
