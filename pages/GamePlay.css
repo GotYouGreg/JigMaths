@@ -1,0 +1,29 @@
+body {
+    background-color: #85DCBA;
+    min-width: 800px;
+    min-height: 800px;
+}
+
+.gamePlay {
+    position: fixed;
+    top: 10%;
+    left: 50%;
+}
+
+
+.gamePlayText {
+    position: absolute;
+    width: 445px;
+    height: 157px;
+    left: calc(50% - 445px/2 + 11.5px);
+    top: calc(50% - 157px/2 + 26.5px);
+    
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 64px;
+    line-height: 75px;
+    text-align: center;
+    
+    color: #AB5942;
+}

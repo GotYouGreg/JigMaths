@@ -4,13 +4,13 @@ body {
     min-height: 1000px; */
 }
 
-.yearlevel {
+.PuzzleSelector {
     position: fixed;
     top: 10%;
     left: 50%;
 }
 
-.yearleveltext {
+.PuzzleSelectortext {
     position: absolute;
     width: 445px;
     height: 157px;
