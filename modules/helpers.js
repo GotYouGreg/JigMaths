@@ -8,6 +8,26 @@ function getYearLevel() {
 }
 
 // Store the year level in local storage
-function storeYearLevel(level) {
-    localStorage.setItem('yearLevel', level);
+function storeYearLevel(yearLevel) {
+    localStorage.setItem('yearLevel', yearLevel);
+} 
+
+// Get the level from local storage
+function getLevel() {
+    return localStorage.getItem('level')
+}
+
+// Store the level in local storage
+function storeLevel(level) {
+    localStorage.setItem('level', level);
+} 
+
+// Get the puzzle image from local storage
+function getPuzzleImage() {
+    return localStorage.getItem('puzzleImage')
+}
+
+// Store the puzzle image in local storage
+function storePuzzleImage(puzzleImage) {
+    localStorage.setItem('puzzleImage', puzzleImage);
 } 

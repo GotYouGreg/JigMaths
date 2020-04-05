@@ -12,7 +12,8 @@
         }
 
         function startButtonClicked(button) {
-            window.location.href = "./pages/LevelSelector.html" + "?Level=" + button.id;
+            storeYearLevel(button.id);
+            window.location.href = "./pages/LevelSelector.html";
         }
 
         function helpButtonClicked() {
@@ -50,21 +51,21 @@
 
     <div class="year4">
         <img src="./images/Year 4 button.png" alt="Play for Year 4" class="image" style="width:100%">
-        <div id="year4" onclick="startButtonClicked(this);" class="middle">
+        <div id="4" onclick="startButtonClicked(this);" class="middle">
             <div class="text">Play Year 4</div>
         </div>
     </div>
 
     <div class="year5">
         <img src="./images/Year 5 button.png" alt="Play for Year 5" class="image" style="width:100%">
-        <div id="year5" onclick="startButtonClicked(this);" class="middle">
+        <div id="5" onclick="startButtonClicked(this);" class="middle">
             <div class="text">Play Year 5</div>
         </div>
     </div>
 
     <div class="year6">
         <img src="./images/Year 6 button.png" alt="Play for Year 6" class="image" style="width:100%">
-        <div id="year6" onclick="startButtonClicked(this);" class="middle">
+        <div id="6" onclick="startButtonClicked(this);" class="middle">
             <div class="text">Play Year 6</div>
         </div>
     </div>
