@@ -1,0 +1,65 @@
+body {
+    background-color: #85DCBA;
+    min-width: 800px;
+    min-height: 800px;
+}
+
+
+.learnText {
+    position: absolute;
+    width: 445px;
+    height: 157px;
+    left: calc(50% - 445px/2 + 11.5px);
+    
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 64px;
+    line-height: 75px;
+    text-align: top;
+    
+    color: #AB5942;
+}
+
+.addition {
+    position: absolute;
+    width: 593px;
+    height: 242px;
+    left: 22px;
+    top: 169px;
+    cursor: pointer;
+}
+
+.subtraction {
+    position: absolute;
+    width: 593px;
+    height: 242px;
+    left: 665px;
+    top: 169px;
+}
+
+.multiplication {
+    position: absolute;
+    width: 593px;
+    height: 242px;
+    left: 22px;
+    top: 439px;
+}
+
+.division {
+    position: absolute;
+    width: 593px;
+    height: 242px;
+    left: 665px;
+    top: 439px;
+}
+
+.arrowButton {
+    position: absolute;
+    width: 151.11px;
+    height: 152.83px;
+    left: 75px;
+    top: -11px;
+    cursor: pointer;
+}
+

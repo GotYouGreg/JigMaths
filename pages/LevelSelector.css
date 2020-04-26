@@ -60,3 +60,14 @@ body {
     margin: 10px;
     cursor: pointer;
 }
+
+.learnButton {
+    position: absolute;
+    width: 336px;
+    height: 104px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    top: 800px;
+    cursor: pointer;
+}
