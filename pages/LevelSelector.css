@@ -71,3 +71,13 @@ body {
     top: 800px;
     cursor: pointer;
 }
+
+
+.arrowButton {
+    position: absolute;
+    width: 151.11px;
+    height: 152.83px;
+    left: 75px;
+    top: -11px;
+    cursor: pointer;
+}

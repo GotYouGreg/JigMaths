@@ -20,6 +20,10 @@
             window.location.href = "../pages/uploadPhoto.html";
         }
 
+        function arrowButtonClicked(button) {
+            window.location.href = "../pages/LevelSelector.html";
+        }
+
     </script>
 </head>
 
@@ -30,7 +34,9 @@
             Select Puzzle
         </div>
     </div>
-    
+
+    <img src="../images/Arrow.png" alt="Back" class="arrowButton" id="1" onclick="arrowButtonClicked(this);">
+
     <div class="selectorContainer">
         <div class="flexContainer">
             <img src="../images/Minecraft image.png" alt="Minecraft Puzzle" class="levelButton" id="Minecraft" onclick="puzzleButtonClicked(this);">

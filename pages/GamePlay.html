@@ -6,8 +6,12 @@
     <script type="text/javascript" src="../modules/helpers.js"></script>
     <script>
         function onLoaded() {
-            
         }
+    function arrowButtonClicked(button) { 
+    window.location.href = "../pages/LevelSelector.html";}
+
+    function RedoButtonClicked(button) { 
+    window.location.href = "../pages/GamePlay.html";}
     </script>
 </head>
 
@@ -22,6 +26,8 @@
  <div class="selectorContainer">
            <div class="flexContainer">
                 <img src="../images/tray.png" alt="GameTray" class="tray">
+                <img src="../images/Arrow.png" alt="Back" class="arrowButton" id="1" onclick="arrowButtonClicked(this);">
+                <img src="../images/Redo button.png" alt="Redo" class="RedoButton" id="1" onclick="RedoButtonClicked(this);">
 </body>
 
 </html>
