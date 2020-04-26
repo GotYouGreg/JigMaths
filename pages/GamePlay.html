@@ -7,27 +7,43 @@
     <script>
         function onLoaded() {
         }
-    function arrowButtonClicked(button) { 
-    window.location.href = "../pages/LevelSelector.html";}
+        function arrowButtonClicked(button) {
+            window.location.href = "../pages/LevelSelector.html";
+        }
 
-    function RedoButtonClicked(button) { 
-    window.location.href = "../pages/GamePlay.html";}
+        function RedoButtonClicked(button) {
+            window.location.href = "../pages/GamePlay.html";
+        }
+
+        function CheckAnswer(){
+            alert("Check");
+        } 
     </script>
 </head>
 
 <body class="body" onload="onLoaded()">
 
-        <div class="gamePlay">
-            <div id="gamePlay" class="gamePlayText">
-                Game Play
-            </div>
+    <div class="gamePlay">
+        <div id="gamePlay" class="gamePlayText">
+            Game Play
         </div>
-       
- <div class="selectorContainer">
-           <div class="flexContainer">
-                <img src="../images/Tray.png" alt="GameTray" class="tray">
-                <img src="../images/Arrow.png" alt="Back" class="arrowButton" id="1" onclick="arrowButtonClicked(this);">
-                <img src="../images/Redo button.png" alt="Redo" class="RedoButton" id="1" onclick="RedoButtonClicked(this);">
+    </div>
+
+    <div class="selectorContainer">
+        <div class="flexContainer">
+            <img src="../images/Tray.png" alt="GameTray" class="tray">
+            <img src="../images/Arrow.png" alt="Back" class="arrowButton" id="1" onclick="arrowButtonClicked(this);">
+            <img src="../images/Redo button.png" alt="Redo" class="RedoButton" id="1"
+                onclick="RedoButtonClicked(this);">
+        </div>
+    </div>
+
+    <div class="qanda"> 
+        <label>1x20=</label>
+        <input type="number" id="answer" class="answer">
+        <button type="button" onclick="CheckAnswer()" class="check">Submit</button>
+    </div>
+
 </body>
 
 </html>
