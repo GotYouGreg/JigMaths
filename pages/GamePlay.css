@@ -35,3 +35,21 @@ body {
     left: center;
     top: 463px;    
 }
+
+.RedoButton {
+    position: absolute;
+    width: 81px;
+    height: 77px;
+    left: 1279.91px;
+    top: 76.98px;
+    
+    transform: rotate(178.56deg);   
+}
+.arrowButton {
+    position: absolute;
+    width: 151.11px;
+    height: 152.83px;
+    left: 75px;
+    top: -11px;
+    cursor: pointer;
+}
