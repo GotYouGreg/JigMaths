@@ -10,9 +10,17 @@
             document.getElementById("yearlevel").innerHTML = "Year " + yearLevel;
         }
 
+        function arrowButtonClicked(button) {
+            window.location.href = "../index.html";
+        }
+
         function levelButtonClicked(button) {
             storeLevel(button.id);
             window.location.href = "../pages/PuzzleSelector.html";
+        }
+
+        function learnButtonClicked(button) {
+            window.location.href = "../pages/LearnPage.html";
         }
     </script>
 </head>
@@ -24,7 +32,9 @@
             Year
         </div>
     </div>
-    
+
+    <img src="../images/Arrow.png" alt="Back" class="arrowButton" id="1" onclick="arrowButtonClicked(this);">
+   
     <div class="selectorContainer">
         <div class="flexContainer">
             <img src="../images/Level 1.png" alt="Select level 1" class="levelButton" id="1" onclick="levelButtonClicked(this);">
@@ -35,12 +45,14 @@
         <div class="flexContainer">
             <img src="../images/Level 5.png" alt="Select level 5" class="levelButton" id="5" onclick="levelButtonClicked(this);">
             <img src="../images/Level 6.png" alt="Select level 6" class="levelButton" id="6" onclick="levelButtonClicked(this);">
-            <img src="../images/Level 7.png" alt="Select level 7" class="levelButton" id="" onclick="levelButtonClicked(this);">
+            <img src="../images/Level 7.png" alt="Select level 7" class="levelButton" id="7" onclick="levelButtonClicked(this);">
             <img src="../images/Level 8.png" alt="Select level 8" class="levelButton" id="8" onclick="levelButtonClicked(this);">
+
         </div>
         <div id="title" class="titletext">
             Select Level
         </div>
+             <img src="../images/Learn button.png" alt="Select learn button" class="learn" id="learnPage" onclick="learnButtonClicked(this);">
     </div>
 
 </body>

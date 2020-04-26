@@ -1,0 +1,44 @@
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="./LearnPage.css">
+    <script type="text/javascript" src="../modules/helpers.js"></script>
+    <script>
+       
+        function additionButtonClicked(button) {
+        window.location.href = "../pages/additionPage.html";
+        }   
+        function subtractionButtonClicked(button) {
+        window.location.href = "../pages/subtractionPage.html";
+        }   
+        function multiplicationButtonClicked(button) {
+        window.location.href = "../pages/multiplicationPage.html";
+        }   
+        function divisionButtonClicked(button) {
+        window.location.href = "../pages/divisionPage.html";
+        }   
+        function arrowButtonClicked(button) {
+        window.location.href = "../pages/LevelSelector.html";
+        }
+        
+    </script>
+</head>
+
+<img src="../images/Arrow.png" alt="Back" class="arrowButton" id="1" onclick="arrowButtonClicked(this);">
+<body class="body" onload="onLoaded()">
+
+        <div class="learn">
+            <div id="learnPage" 
+            class="learnText">
+                Select what you want to learn
+            </div>
+            <img src="../images/Addittion button.png" alt="Select addittionButton" class="addition" id="additionPage" onclick="additionButtonClicked(this);">
+            <img src="../images/Subtraction button.png" alt="Select subtractionButton" class="subtraction" id="subtractionPage" onclick="subtractionButtonClicked(this);">
+            <img src="../images/Multiplication button.png" alt="Select multiplicationButton" class="multiplication" id="multiplicationPage" onclick="multiplicationButtonClicked(this);">
+            <img src="../images/Division button.png" alt="Select divisionButton" class="division" id="divisionPage" onclick="divisionButtonClicked(this);">
+        </div>
+    
+</body>
+
+</html>

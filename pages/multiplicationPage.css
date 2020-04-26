@@ -4,19 +4,20 @@ body {
     min-height: 800px;
 }
 
-.gamePlay {
+.multiplication {
     position: fixed;
     top: 10%;
     left: 50%;
 }
 
 
-.gamePlayText {
+.multiplicationText {
     position: absolute;
-    width: 445px;
-    height: 157px;
-    left: calc(50% - 445px/2 + 11.5px);
-    top: calc(50% - 157px/2 + 26.5px);
+
+    height: 126px;
+    left: center;
+    top: 54px;
+ 
     
     font-family: Roboto;
     font-style: normal;
@@ -26,12 +27,4 @@ body {
     text-align: center;
     
     color: #AB5942;
-}
-
-.tray {
-    position: absolute;
-    width: absolute;
-    height: 285px;
-    left: center;
-    top: 463px;    
 }
