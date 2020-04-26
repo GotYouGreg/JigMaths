@@ -42,8 +42,6 @@ body {
     height: 77px;
     left: 1279.91px;
     top: 76.98px;
-    
-    transform: rotate(178.56deg);   
 }
 .arrowButton {
     position: absolute;
@@ -52,4 +50,21 @@ body {
     left: 75px;
     top: -11px;
     cursor: pointer;
+}
+
+.qanda{
+    position: absolute;
+    left: center;
+    top: 700px;  
+    width: 800px;
+    height: 52.83px; 
+    font-size: 30px; 
+}
+
+.answer{
+    font-size: 30px; 
+}
+
+.check{
+    font-size: 30px; 
 }
