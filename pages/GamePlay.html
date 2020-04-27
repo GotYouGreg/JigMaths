@@ -10,6 +10,11 @@
         var lastEquationVal2 = "";
         var lastEquationOperator = "";
 
+        function onLoad() {
+            // Generate initail equation
+            document.getElementById("equation").innerHTML = generateEquation();
+        }
+
         function arrowButtonClicked(button) {
             window.location.href = "../pages/LevelSelector.html";
         }
@@ -24,19 +29,32 @@
 
             if(UserAnswer == CorrectAnswer) {
                 alert("Correct answer");
+                // Clear answer
+                document.getElementById("answer").value = "";
+                 // Generate new equation
+                lastEquationVal1 = (Math.ceil(Math.random() * 10 * getYearLevel()/4) * getLevel());
+                lastEquationVal2 = (Math.ceil(Math.random() * 10 * getYearLevel()/4) * getLevel());
+                document.getElementById("equation").innerHTML = lastEquationVal1 + " + " + lastEquationVal2;
             } else {
                 alert("Answer wrong. Answer was " + UserAnswer + ";  Expected " + CorrectAnswer);
             }
+        }
 
-            // Generate new equation
+        function checkEnterKey(event, field) {
+            if (event.keyCode === 13) {
+                CheckAnswer();
+            }
+        }
+
+        function generateEquation() {
             lastEquationVal1 = (Math.ceil(Math.random() * 10 * getYearLevel()/4) * getLevel());
             lastEquationVal2 = (Math.ceil(Math.random() * 10 * getYearLevel()/4) * getLevel());
-            document.getElementById("equation").innerHTML = lastEquationVal1 + " + " + lastEquationVal2;
-        } 
+            return lastEquationVal1 + " + " + lastEquationVal2;
+        }
     </script>
 </head>
 
-<body class="body">
+<body class="body" onload="onLoad()">
 
     <div class="gamePlay">
         <div id="gamePlay" class="gamePlayText">
@@ -54,8 +72,8 @@
     </div>
 
     <div class="qanda">
-        <label id="equation">_+_=</label>
-        <input type="number" id="answer" class="answer">
+        <label id="equation"></label>
+        <input type="number" id="answer" class="answer" onkeypress="checkEnterKey(event, this)">
         <button type="button" onclick="CheckAnswer()" class="check">Submit</button>
     </div>
 
