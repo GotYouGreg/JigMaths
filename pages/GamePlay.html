@@ -5,8 +5,11 @@
     <link rel="stylesheet" type="text/css" href="./GamePlay.css">
     <script type="text/javascript" src="../modules/helpers.js"></script>
     <script>
-        function onLoaded() {
-        }
+
+        var lastEquationVal1 = "";
+        var lastEquationVal2 = "";
+        var lastEquationOperator = "";
+
         function arrowButtonClicked(button) {
             window.location.href = "../pages/LevelSelector.html";
         }
@@ -15,13 +18,25 @@
             window.location.href = "../pages/GamePlay.html";
         }
 
-        function CheckAnswer(){
-            alert("Check");
+        function CheckAnswer() {
+            var CorrectAnswer = parseInt(lastEquationVal1) + parseInt(lastEquationVal2);
+            var UserAnswer = parseInt(document.getElementById("answer").value);
+
+            if(UserAnswer == CorrectAnswer) {
+                alert("Correct answer");
+            } else {
+                alert("Answer wrong. Answer was " + UserAnswer + ";  Expected " + CorrectAnswer);
+            }
+
+            // Generate new equation
+            lastEquationVal1 = (Math.ceil(Math.random() * 10 * getYearLevel()/4) * getLevel());
+            lastEquationVal2 = (Math.ceil(Math.random() * 10 * getYearLevel()/4) * getLevel());
+            document.getElementById("equation").innerHTML = lastEquationVal1 + " + " + lastEquationVal2;
         } 
     </script>
 </head>
 
-<body class="body" onload="onLoaded()">
+<body class="body">
 
     <div class="gamePlay">
         <div id="gamePlay" class="gamePlayText">
@@ -38,8 +53,8 @@
         </div>
     </div>
 
-    <div class="qanda"> 
-        <label>1x20=</label>
+    <div class="qanda">
+        <label id="equation">_+_=</label>
         <input type="number" id="answer" class="answer">
         <button type="button" onclick="CheckAnswer()" class="check">Submit</button>
     </div>
