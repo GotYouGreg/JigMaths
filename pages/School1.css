@@ -1,0 +1,31 @@
+.button {
+    left: left;
+    width: 445px;
+    height: bottom;
+    left: calc(50% - 445px/2 + 11.5px);
+    cursor: pointer
+}
+
+.Die1{
+    position: absolute
+}
+
+.Die2{
+    position: absolute
+}
+
+.Die3{
+    position: absolute
+}
+
+.Die4{
+    position: absolute
+}
+
+.Die5{
+    position: absolute
+}
+
+.Die6{
+    position: absolute
+}

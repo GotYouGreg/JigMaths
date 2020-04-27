@@ -1,0 +1,49 @@
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="./School1.css">
+    <script type="text/javascript" src="./modules/helpers.js"></script>
+    <script>
+
+function fnRoll () {
+    Id= Die (Math.ceil(math.random()*6)); 
+    Id= Die (Math.ceil(math.random()*6)); 
+    document.getElementById ("result") .innerHTML= "You rolled a" + dice1 + "and a" + dice2 + ", which is a total of "+ (dice1+dice2)
+    primg (dice1, "image1");
+    primg (dice2, "image2");
+} 
+function primg (i,k){
+switch (i){
+case 1:
+    document.getElementById(k).png="Die1";
+    break;
+case 2:
+    document.getElementById(k).png="Die2";
+    break;
+case 3:
+    document.getElementById(k).png="Die3";
+    break;
+case 4:
+    document.getElementById(k).png="Die4";
+    break;
+case 5:
+    document.getElementById(k).png="Die5";
+    break;
+case 6:
+    document.getElementById(k).png="Die6";
+    break;
+}
+}
+    </script>
+    </head>
+<body>
+<h2> Roll the dice</h2>
+
+<button Id="buton" onclick= "fnRoll()">Roll!</button><br>
+<p id="result"> please click Roll!</p> </br>
+
+<img src="0.svg" alt="Dice1" id="img1">
+<img src="0.svg" alt="Dice 2" id="img2">
+
+</body>
