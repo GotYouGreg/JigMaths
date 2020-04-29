@@ -26,3 +26,9 @@ body {
     
     color: #AB5942;
 }
+
+.Example {
+    position: fixed;
+    top: 5%;
+    left: 20px;
+}

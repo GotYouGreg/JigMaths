@@ -5,14 +5,16 @@
     <link rel="stylesheet" type="text/css" href="./GamePlay.css">
     <script type="text/javascript" src="../modules/helpers.js"></script>
     <script>
-
-        var lastEquationVal1 = "";
-        var lastEquationVal2 = "";
+        // Global variables
+        var lastEquationVal1 = 0;
+        var lastEquationVal2 = 0;
         var lastEquationOperator = "";
+        var year = getYearLevel();
+        var level = getLevel();
 
         function onLoad() {
             // Generate initail equation
-            document.getElementById("equation").innerHTML = generateEquation();
+            document.getElementById("equation").innerHTML = generateEquation(year, level);
         }
 
         function arrowButtonClicked(button) {
@@ -24,19 +26,30 @@
         }
 
         function CheckAnswer() {
-            var CorrectAnswer = parseInt(lastEquationVal1) + parseInt(lastEquationVal2);
-            var UserAnswer = parseInt(document.getElementById("answer").value);
+            var val1 = parseInt(lastEquationVal1);
+            var val2 = parseInt(lastEquationVal2);
+            var correctAnswer = 0;
 
-            if(UserAnswer == CorrectAnswer) {
+            if(lastEquationOperator == "+") {
+                correctAnswer = val1 + val2;
+            } else if (lastEquationOperator == "-") {
+                correctAnswer = val1 - val2;
+            } else if (lastEquationOperator == "x") {
+                correctAnswer = val1 * val2;
+            } else {
+                correctAnswer = val1 / val2;
+            }
+
+            var userAnswer = parseInt(document.getElementById("answer").value);
+
+            if (userAnswer == correctAnswer) {
                 alert("Correct answer");
                 // Clear answer
                 document.getElementById("answer").value = "";
-                 // Generate new equation
-                lastEquationVal1 = (Math.ceil(Math.random() * 10 * getYearLevel()/4) * getLevel());
-                lastEquationVal2 = (Math.ceil(Math.random() * 10 * getYearLevel()/4) * getLevel());
-                document.getElementById("equation").innerHTML = lastEquationVal1 + " + " + lastEquationVal2;
+                // Generate new equation
+                document.getElementById("equation").innerHTML = generateEquation(year, level);
             } else {
-                alert("Answer wrong. Answer was " + UserAnswer + ";  Expected " + CorrectAnswer);
+                alert("Answer wrong. Answer was " + userAnswer + ";  Expected " + correctAnswer);
             }
         }
 
@@ -46,10 +59,60 @@
             }
         }
 
-        function generateEquation() {
-            lastEquationVal1 = (Math.ceil(Math.random() * 10 * getYearLevel()/4) * getLevel());
-            lastEquationVal2 = (Math.ceil(Math.random() * 10 * getYearLevel()/4) * getLevel());
-            return lastEquationVal1 + " + " + lastEquationVal2;
+        function generateEquation(year, level) {
+            // Set global variables - used in check answer
+            lastEquationOperator = getEquationType(year);
+            lastEquationVal1 = getEquationValue(year, level, lastEquationOperator);
+            lastEquationVal2 = getEquationValue(year, level, lastEquationOperator);
+
+            // If divide ... need to work backward from multiply
+            if (lastEquationOperator == "/") {
+                lastEquationVal1 = lastEquationVal1 * lastEquationVal2;
+            }
+            
+            return lastEquationVal1 + " " + lastEquationOperator + " " + lastEquationVal2;
+        }
+
+        var equationTypes = ["+", "-", "x", "/"]
+        function getEquationType(year) {
+            var maxEquationSelect = 2;
+            if (year > 4) {
+                maxEquationSelect =  4;
+            }
+
+            var selector = Math.floor(maxEquationSelect * Math.random());
+            return equationTypes[selector];
+        }
+
+        var maxValAddSubtractYear4 = [10, 20, 30, 40, 50, 60, 70, 80];
+        var maxValAddSubtractYear5 = [400, 500, 600, 700, 800, 900, 1000, 2000];
+        var maxValAddSubtractYear6 = [700, 800, 900, 1000, 1500, 2000, 3000, 10000];
+
+        var maxValMultDivideYear5 = [5, 6, 7, 8, 9, 10, 11, 12, 13];
+        var maxValMultDivideYear6 = [13, 14, 15, 16, 17, 18, 19, 20];
+
+        function getEquationValue(year, level, equationType) {
+            var value = 0;
+
+            var maxValue = 0;
+            if (equationType == "+" || equationType == "-") {
+                if (year == 4) {
+                    maxValue = maxValAddSubtractYear4[level - 1];
+                } else if (year == 5) {
+                    maxValue = maxValAddSubtractYear5[level - 1];
+                } else if (year == 6) {
+                    maxValue = maxValAddSubtractYear6[level - 1];
+                }
+            } else if (equationType == "x" || equationType == "/") {
+                if (year == 5) {
+                    maxValue = maxValMultDivideYear5[level - 1];
+                } else if (year == 6) {
+                    maxValue = maxValMultDivideYear6[level - 1];
+                }
+            }
+
+            value = [(Math.ceil(Math.random() * maxValue))];
+            return value;
         }
     </script>
 </head>
