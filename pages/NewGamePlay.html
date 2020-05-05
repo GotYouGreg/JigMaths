@@ -5,6 +5,7 @@
     <script>
 
         var draggedItem;
+        var draggedImage;
 
         function dragstart_handler(ev) {
             // Add the target element's id to the data transfer object
@@ -30,7 +31,7 @@
             ev.preventDefault();
 
             // Highlight dropped slot - ToDo: needs to display piece image
-            ev.currentTarget.style.background = "darkblue";
+            ev.currentTarget.style.background = "url(../puzzleImages/unicorn.jpg)  -1500px -750px";
 
             // Hide the puzzle piece
             document.getElementById(draggedItem).style.display = "none";
