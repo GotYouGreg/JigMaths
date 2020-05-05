@@ -1,0 +1,83 @@
+.body, html{
+    height: 100%;
+}
+
+.container {
+    display: flex; /* or inline-flex */
+    flex-direction: column;
+    height: 100%;
+    flex: 1;
+  }
+
+.headerContainer {
+    display: flex; 
+    flex-direction: row;
+    width: 100%;
+    border-color: hotpink;
+    border-style: solid;
+}
+
+.header {
+    border-style: solid;
+    border-color: red;
+    flex: 1;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.backButton {
+    border-style: solid;
+    border-color: black;
+    flex-grow: 1;
+    height: 50px;
+}
+
+.timer {
+    border-style: solid;
+    border-color: red;
+    text-align: center;
+    flex-grow: 1;
+    height: 50px;
+}
+
+.reset {
+    border-style: solid;
+    border-color: green;
+    text-align: right;
+    flex-grow: 1;
+    height: 50px;
+}
+
+.puzzle {
+    border-style: solid;
+    border-color: green;
+    flex: 10;
+    flex-direction: column;
+    display: flex;
+    align-items: center;
+    height: 100%
+}
+
+.puzzleRow {
+    border-style: solid;
+    border-color: red;
+    flex-grow: 1;
+    flex-basis: auto; 
+}
+
+.puzzlePiece {
+    border-style: solid;
+    border-color: purple;
+}
+
+.pieces {
+    border-style: solid;
+    border-color: blue;
+    flex: 3;
+}
+
+.qanda {
+    border-style: solid;
+    border-color: pink;
+    flex: 2;
+}
