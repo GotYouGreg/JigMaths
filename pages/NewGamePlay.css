@@ -9,75 +9,94 @@
     flex: 1;
   }
 
-.headerContainer {
-    display: flex; 
-    flex-direction: row;
-    width: 100%;
-    border-color: hotpink;
-    border-style: solid;
-}
-
 .header {
-    border-style: solid;
-    border-color: red;
+    display: flex; 
     flex: 1;
-    justify-content: space-between;
     align-items: center;
 }
 
 .backButton {
-    border-style: solid;
-    border-color: black;
     flex-grow: 1;
-    height: 50px;
+    font-size: 30px; 
 }
 
 .timer {
-    border-style: solid;
-    border-color: red;
     text-align: center;
     flex-grow: 1;
-    height: 50px;
+    font-size: 30px; 
 }
 
 .reset {
-    border-style: solid;
-    border-color: green;
     text-align: right;
     flex-grow: 1;
-    height: 50px;
+    font-size: 30px; 
 }
 
 .puzzle {
-    border-style: solid;
-    border-color: green;
+    display: flex;
     flex: 10;
     flex-direction: column;
-    display: flex;
     align-items: center;
     height: 100%
 }
 
 .puzzleRow {
-    border-style: solid;
-    border-color: red;
-    flex-grow: 1;
-    flex-basis: auto; 
+    flex-direction: row;
+    display: flex;
+    justify-content: center;
 }
 
-.puzzlePiece {
+.puzzleSlot {
     border-style: solid;
-    border-color: purple;
+    border-color: lightgray;
+    border-width: 1px;
+    flex: 1;
+    width: 150px;
+    height: 150px;
 }
 
 .pieces {
-    border-style: solid;
-    border-color: blue;
+    display: flex;
     flex: 3;
 }
 
-.qanda {
+.puzzlePiece {
+    width: 150px;
+    height: 150px;
     border-style: solid;
-    border-color: pink;
+    border-color: lightgray;
+    background-color: pink;
+    position: absolute;
+    left: 100px;
+}
+
+.qanda {
+    display: flex;
+    border-style: solid;
+    border-color: lightskyblue;
     flex: 2;
+    justify-content: center;
+    padding:5px
+}
+
+.formula {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin:5px
+}
+
+.question {
+    font-size: 30px; 
+    margin:5px
+}
+
+.answer{
+    font-size: 30px; 
+    margin:5px
+}
+
+.check{
+    font-size: 30px; 
+    margin:5px
 }
