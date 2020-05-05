@@ -25,12 +25,14 @@
             ev.currentTarget.style.background = "white";
         }
 
-
         function drop_handler(ev) {
             // console.log("Drop");
             ev.preventDefault();
+
+            // Highlight dropped slot - ToDo: needs to display piece image
             ev.currentTarget.style.background = "darkblue";
 
+            // Hide the puzzle piece
             document.getElementById(draggedItem).style.display = "none";
         }
     </script>
@@ -78,7 +80,10 @@
             </div>
         </div>
         <div id="pieces" class="pieces">
-            <div id="piece1" draggable="true" ondragstart="dragstart_handler(event);" class="puzzlePiece"></div>
+            <div id="piece1" draggable="true" ondragstart="dragstart_handler(event);" class="piece1">
+            </div>
+            <div id="piece2" draggable="true" ondragstart="dragstart_handler(event);" class="piece2">
+            </div>
         </div>
         <div id="qanda" class="qanda">
             <div class="formula">

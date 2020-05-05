@@ -57,17 +57,27 @@
 
 .pieces {
     display: flex;
-    flex: 3;
+    flex: 4;
 }
 
-.puzzlePiece {
+.piece1 {
     width: 150px;
     height: 150px;
     border-style: solid;
     border-color: lightgray;
-    background-color: pink;
     position: absolute;
     left: 100px;
+    background: url(../puzzleImages/unicorn.jpg)  0 0;
+}
+
+.piece2 {
+    width: 150px;
+    height: 150px;
+    border-style: solid;
+    border-color: lightgray;
+    position: absolute;
+    left: 500px;
+    background: url(../puzzleImages/unicorn.jpg)  -1500px -750px;
 }
 
 .qanda {
