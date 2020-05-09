@@ -26,6 +26,7 @@
 
         var allPieces = [];
         var currentPiece = 0;
+        var puzzleDone = false;
 
         // selected puzzle image -- ToDo: Fix this to get from storage
         var selectPuzzle = 1;
@@ -112,7 +113,15 @@
             let puzzle = document.getElementById("puzzle");
 
             if (currentPiece == allPieces.length) {
+                // Finished the puzzle
+                // Animate the puzzle to celebrate
                 puzzle.classList.add('puzzleDone');
+
+                // Stop timer
+                puzzleDone = true;
+
+                // Store the latest result
+                storeLatestResult(totalSeconds);
 
                 // remove the class after the animation completes
                 setTimeout(function () {
@@ -135,10 +144,11 @@
         }
 
         function setTime() {
-            ++totalSeconds;
-            // alert("setTimeFired: " + totalSeconds);
-            document.getElementById("seconds").innerHTML = pad(totalSeconds % 60);
-            document.getElementById("minutes").innerHTML = pad(parseInt(totalSeconds / 60));
+            if (!puzzleDone) {
+                ++totalSeconds;
+                document.getElementById("seconds").innerHTML = pad(totalSeconds % 60);
+                document.getElementById("minutes").innerHTML = pad(parseInt(totalSeconds / 60));
+            }
         }
 
         function pad(val) {

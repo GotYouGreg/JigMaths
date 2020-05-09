@@ -22,6 +22,26 @@ function storeLevel(level) {
     localStorage.setItem('level', level);
 } 
 
+// Get latest Result
+function getLatestResult() {
+    return localStorage.getItem('latestResult')
+}
+
+// Store Latest Result
+function storeLatestResult(latestResult) {
+    return setItem.setItem('latestResult', latestResult)
+}
+
+// Get PB
+function getPB() {
+    return localStorage.getItem('PB')
+}
+
+// Store PB
+function storePB(PB) {
+    return setItem.setItem('PB', PB)
+}
+
 // Get the puzzle image from local storage
 function getPuzzleImage() {
     return localStorage.getItem('puzzleImage')
