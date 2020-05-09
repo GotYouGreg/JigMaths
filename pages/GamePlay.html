@@ -197,9 +197,8 @@
                 // Generate new equation
                 document.getElementById("equation").innerHTML = generateEquation(year, level);
 
-                document.activeElement.blur();
-
                 allPieces[currentPiece++].style.visibility = "visible";
+                document.activeElement.blur();
             } else {
                 // Add a class that defines an animation
                 var answer = document.getElementById('answer');
