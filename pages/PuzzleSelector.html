@@ -4,11 +4,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="./PuzzleSelector.css">
     <script type="text/javascript" src="../modules/helpers.js"></script>
+    <script type="text/javascript" src="../modules/puzzleimages.js"></script>
     <script>
+        var selectPuzzleImage = "";
+
         function onLoaded() {
             var yearLevel = getYearLevel();
             var level = getLevel();
             // ToDo: Display different puzzles for different years?
+            var selectPuzzleImage = getPuzzleImage(2); 
         }
 
         function puzzleButtonClicked(button) {
@@ -23,7 +27,6 @@
         function arrowButtonClicked(button) {
             window.location.href = "../pages/LevelSelector.html";
         }
-
     </script>
 </head>
 

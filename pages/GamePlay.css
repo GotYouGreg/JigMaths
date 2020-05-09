@@ -45,6 +45,17 @@ body {
     height: 100%
 }
 
+.puzzleDone {
+    position: relative;
+    animation: shakeCongrats .1s linear;
+    animation-iteration-count: 15;
+}
+
+@keyframes shakeCongrats {
+    0% { left: -20px; }
+    100% { right: -20px; }
+}
+
 .puzzleRow {
     flex-direction: row;
     display: flex;
@@ -56,8 +67,7 @@ body {
     border-color: lightgray;
     border-width: 1px;
     flex: 1;
-    width: 150px;
-    height: 150px;
+    opacity: 0.5;
 }
 
 .pieces {
@@ -105,4 +115,9 @@ body {
 @keyframes shake {
     0% { left: -5px; }
     100% { right: -5px; }
+}
+
+.piece{
+    position: absolute;
+    visibility: hidden;
 }
