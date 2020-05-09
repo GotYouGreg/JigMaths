@@ -108,7 +108,6 @@
 
             // Hide the puzzle piece
             document.getElementById(draggedItem).style.display = "none";
-            document.getElementById("answer").focus();
 
             let puzzle = document.getElementById("puzzle");
 
@@ -120,6 +119,10 @@
                     puzzle.classList.remove('puzzleDone');
                 }, 10000);
                 // alert("Congratulations!!!");
+            } else {
+                // Not finished
+                document.getElementById("answer").focus();
+                document.getElementById("answer").select();
             }
         }
 
