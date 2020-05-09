@@ -26,14 +26,14 @@ body {
     position: absolute;
     width: 445px;
     height: 157px;
-    left: calc(50% - 445px/2 + 11.5px);
-    top: calc(50% - 157px/2 + 26.5px);
-    
+    left: calc(50% - 531px/2 - 0.5px);
+    top: calc(50% - 107.54px/2 + 10.77px);
+
     font-family: Roboto;
     font-style: normal;
     font-weight: bold;
     font-size: 64px;
-    line-height: 75px;
+    line-height: 500px;
     text-align: center;
     
     color: #AB5942;
@@ -43,8 +43,8 @@ body {
     position: absolute;
     width: 531px;
     height: 107.54px;
-    left: calc(50% - 531px/2 - 32.5px);
-    top: calc(50% - 107.54px/2 - 5.23px);
+    left: calc(50% - 531px/2 - 0.5px);
+    top: calc(50% - 107.54px/2 - 235.23px);
 
     font-family: Roboto;
     font-style: normal;
@@ -61,7 +61,7 @@ body {
     width: 722px;
     height: 244px;
     left: calc(50% - 722px/2);
-    top: calc(50% - 244px/2 + 187px);
+    top: calc(5% - 244px/2 + 187px);
 
     font-family: Roboto;
     font-style: normal;
@@ -72,5 +72,25 @@ body {
     color: #AB5942;
 }
 
+.helpParagraph{
+    position: absolute;
+    width: 722px;
+    height: 244px;
+    left: calc(50% - 722px/2);
+    top: calc(35% - 244px/2 + 187px);
 
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 23px;
+    
+    color: #AB5942;
 
+}
+
+.Image{
+    width: 300px;
+    height: 300px;
+
+}
