@@ -434,11 +434,13 @@
         <div id="pieces" class="pieces">
         </div>
 
-        <div class="equation">
-            <label id="equation"></label>
-            <input type="number" id="answer" class="answer" autofocus="autofocus"
-                onkeypress="checkEnterKey(event, this)">
-            <button type="button" onclick="CheckAnswer()" class="check">Submit</button>
+        <div class="qanda">
+            <div class="formula">
+                <label id="equation" class="equation"></label>
+                <input type="number" id="answer" class="answer" autofocus="autofocus"
+                    onkeypress="checkEnterKey(event, this)">
+                <button type="button" onclick="CheckAnswer()" class="check">Submit</button>
+            </div>
         </div>
     </div>
 </body>
