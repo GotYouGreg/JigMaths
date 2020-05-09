@@ -6,62 +6,95 @@
     <script type="text/javascript" src="../modules/puzzleImages.js"></script>
     <script>
 
+        // ----------------------------------------------
         // Global variables
-        var draggedItem; // Set when a piece is dragged
+        // ----------------------------------------------
+
+        // Set when a piece is dragged
+        var draggedItem;
         var draggedImage;
 
-        // Add comment on what this does
+        // User to to build equations
         var lastEquationVal1 = 0;
         var lastEquationVal2 = 0;
         var lastEquationOperator = "";
-        var year = getYearLevel();
-        var level = getLevel();
+
+        // The user's current level
+        var year = 0;
+        var level = 0;
+
+        // How many seconds the user has been doing the puzzle
         var totalSeconds = 0;
 
+        // The number of rows and columns for user's grade and level
         var numberOfRows = 0;
         var numberOfColumns = 0;
 
+        // Size of the pieces
         var slotWidth = 0;
         var slotHeight = 0;
 
+        // Array of the pieces
         var allPieces = [];
+
+        // Current piece use is up to
         var currentPiece = 0;
+
+        // Has user finished puzzle
         var puzzleDone = false;
 
         // selected puzzle image -- ToDo: Fix this to get from storage
         var selectPuzzle = 1;
 
+        // Runs when the page load
         function onLoad() {
             // Generate initail equation
             document.getElementById("equation").innerHTML = generateEquation(year, level);
+
+            // Starte the timer
             setInterval(setTime, 1000);
 
+            // get the user's year and level
+            year = getYearLevel();
+            level = getLevel();
+
+            // work out how many rows / columns for he puzzle
             numberOfRows = getNumberOfRows(year, level);
             numberOfColumns = getNumberOfColumns(year, level);
 
+            // work out how big each piece should be
             var slotWidth = (getPuzzleImageWidth(selectPuzzle) / numberOfColumns);
             var slotHeight = (getPuzzleImageHeight(selectPuzzle) / numberOfRows);
 
-            var row;
+            // Get elements for puzzle and pieces
             let puzzleElement = document.getElementById("puzzle");
             let piecesElement = document.getElementById("pieces");
 
             // Add all the slots and pieces
+            var row;
             for (row = 1; row <= numberOfRows; row++) {
+
+                // Add row to puzzle
                 let rowDiv = addRow(puzzleElement);
 
                 var column;
                 for (column = 1; column <= numberOfColumns; column++) {
+
+                    // Add slot in row
                     addSlot(rowDiv, slotHeight, slotWidth, "slot." + row + "." + column, row, column);
 
-                    // Add piece
+                    // Store piece in list of pieces
                     addPiece(piecesElement, slotHeight, slotWidth, "piece." + row + "." + column, row, column);
                 }
             }
 
+            // Shuffle the pieces
             allPieces = shuffle(allPieces);
         }
 
+        // ----------------------------------------------
+        // Drag and drop
+        // ----------------------------------------------
         function dragstart_handler(ev) {
             // Add the target element's id to the data transfer object
             ev.dataTransfer.setData("text/plain", ev.target.id);
@@ -126,8 +159,10 @@
                 // remove the class after the animation completes
                 setTimeout(function () {
                     puzzle.classList.remove('puzzleDone');
-                }, 10000);
-                // alert("Congratulations!!!");
+                    // Show Congrats page
+                    window.location.assign("./Congrats.html");
+                    console.log("Navigate to cograts")
+                }, 2000);
             } else {
                 // Not finished
                 document.getElementById("answer").focus();
@@ -135,6 +170,9 @@
             }
         }
 
+        // ----------------------------------------------
+        // Buttons
+        // ----------------------------------------------
         function arrowButtonClicked(button) {
             window.location.href = "../pages/LevelSelector.html";
         }
@@ -143,6 +181,9 @@
             window.location.href = "../pages/GamePlay.html";
         }
 
+        // ----------------------------------------------
+        // Timer
+        // ----------------------------------------------
         function setTime() {
             if (!puzzleDone) {
                 ++totalSeconds;
@@ -161,6 +202,9 @@
             }
         }
 
+        // ----------------------------------------------
+        // Create equations
+        // ----------------------------------------------
         function generateEquation(year, level) {
             // Set global variables - used in check answer
             lastEquationOperator = getEquationType(year);
@@ -186,6 +230,41 @@
             return equationTypes[selector];
         }
 
+
+        var maxValAddSubtractYear4 = [10, 20, 30, 40, 50, 60, 70, 80];
+        var maxValAddSubtractYear5 = [80, 100, 120, 140, 150, 160, 180, 200];
+        var maxValAddSubtractYear6 = [250, 300, 350, 400, 450, 500, 550, 600];
+
+        var maxValMultDivideYear5 = [5, 6, 7, 8, 9, 10, 11, 12, 13];
+        var maxValMultDivideYear6 = [13, 14, 15, 16, 17, 18, 19, 20];
+
+        function getEquationValue(year, level, equationType) {
+            var value = 0;
+
+            var maxValue = 0;
+            if (equationType == "+" || equationType == "-") {
+                if (year == 4) {
+                    maxValue = maxValAddSubtractYear4[level - 1];
+                } else if (year == 5) {
+                    maxValue = maxValAddSubtractYear5[level - 1];
+                } else if (year == 6) {
+                    maxValue = maxValAddSubtractYear6[level - 1];
+                }
+            } else if (equationType == "x" || equationType == "/") {
+                if (year == 5) {
+                    maxValue = maxValMultDivideYear5[level - 1];
+                } else if (year == 6) {
+                    maxValue = maxValMultDivideYear6[level - 1];
+                }
+            }
+
+            value = [(Math.ceil(Math.random() * maxValue))];
+            return value;
+        }
+
+        // ----------------------------------------------
+        // Check user's answer
+        // ----------------------------------------------
         function CheckAnswer() {
             var val1 = parseInt(lastEquationVal1);
             var val2 = parseInt(lastEquationVal2);
@@ -230,6 +309,9 @@
             }
         }
 
+        // ----------------------------------------------
+        // Work out how many rows and columns is puzzle for user
+        // ----------------------------------------------
         var maxRowsYear4 = [2, 3, 3, 3, 4, 4, 4, 4];
         var maxRowsYear5 = [5, 5, 5, 5, 6, 6, 6, 6];
         var maxRowsYear6 = [7, 7, 7, 7, 8, 8, 8, 8];
@@ -263,6 +345,9 @@
             return maxColumn;
         }
 
+        // ----------------------------------------------
+        // Create the puzzle
+        // ----------------------------------------------
         function addRow(puzzleElement) {
             //alert("Added Row");
             let rowDiv = document.createElement("div");
@@ -311,6 +396,10 @@
             allPieces.push(pieceDiv);
         }
 
+        //---------------------------------------------------
+        // Shuffle the pieces
+        // From: https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
+        //---------------------------------------------------
         function shuffle(array) {
             var currentIndex = array.length, temporaryValue, randomIndex;
 
@@ -330,36 +419,6 @@
             return array;
         }
 
-        var maxValAddSubtractYear4 = [10, 20, 30, 40, 50, 60, 70, 80];
-        var maxValAddSubtractYear5 = [80, 100, 120, 140, 150, 160, 180, 200];
-        var maxValAddSubtractYear6 = [250, 300, 350, 400, 450, 500, 550, 600];
-
-        var maxValMultDivideYear5 = [5, 6, 7, 8, 9, 10, 11, 12, 13];
-        var maxValMultDivideYear6 = [13, 14, 15, 16, 17, 18, 19, 20];
-
-        function getEquationValue(year, level, equationType) {
-            var value = 0;
-
-            var maxValue = 0;
-            if (equationType == "+" || equationType == "-") {
-                if (year == 4) {
-                    maxValue = maxValAddSubtractYear4[level - 1];
-                } else if (year == 5) {
-                    maxValue = maxValAddSubtractYear5[level - 1];
-                } else if (year == 6) {
-                    maxValue = maxValAddSubtractYear6[level - 1];
-                }
-            } else if (equationType == "x" || equationType == "/") {
-                if (year == 5) {
-                    maxValue = maxValMultDivideYear5[level - 1];
-                } else if (year == 6) {
-                    maxValue = maxValMultDivideYear6[level - 1];
-                }
-            }
-
-            value = [(Math.ceil(Math.random() * maxValue))];
-            return value;
-        }
 
     </script>
 </head>

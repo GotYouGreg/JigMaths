@@ -29,7 +29,7 @@ function getLatestResult() {
 
 // Store Latest Result
 function storeLatestResult(latestResult) {
-    return setItem.setItem('latestResult', latestResult)
+    localStorage.setItem('latestResult', latestResult)
 }
 
 // Get PB
