@@ -20,8 +20,8 @@
         var lastEquationOperator = "";
 
         // The user's current level
-        var year = 0;
-        var level = 0;
+        var year = getYearLevel();;
+        var level = getLevel();
 
         // How many seconds the user has been doing the puzzle
         var totalSeconds = 0;
@@ -53,10 +53,6 @@
 
             // Starte the timer
             setInterval(setTime, 1000);
-
-            // get the user's year and level
-            year = getYearLevel();
-            level = getLevel();
 
             // work out how many rows / columns for he puzzle
             numberOfRows = getNumberOfRows(year, level);
