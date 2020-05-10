@@ -4,34 +4,13 @@ body {
     min-height: 1000px; */
 }
 
-.yearlevel {
-    position: fixed;
-    top: 10%;
-    left: 50%;
-}
-
-.yearleveltext {
-    position: absolute;
-    width: 445px;
-    height: 157px;
-    left: calc(50% - 445px/2 + 11.5px);
-    top: calc(50% - 157px/2 + 26.5px);
-    
-    font-family: Roboto;
-    font-style: normal;
-    font-weight: bold;
-    font-size: 64px;
-    line-height: 75px;
-    text-align: center;
-    
-    color: #AB5942;
-}
-
 .titletext {
+    display: flex;
+    flex: 1;
     font-family: Roboto;
     font-style: normal;
     font-weight: bold;
-    font-size: 64px;
+    font-size: 50px;
     line-height: 75px;
     text-align: center;
     
@@ -40,18 +19,45 @@ body {
 
 .selectorContainer {
     display: flex;
-    justify-content: center;
+    flex: 4;
     align-items: center;
     flex-direction: column;
-    min-height: 1000px;
+    min-height: 500px;
 }
 
-.flexContainter {
+.yearlevel {
+    display: flex;
+    flex: 1;
+    align-items: center;
+}
+
+.yearleveltext {
+    width: 445px;
+    height: 110px;
+
+    
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 64px;
+    line-height: 75px;
+    text-align: center;
+    
+    color: #AB5942;
+    align-items: center;
+}
+
+.flexContainer {
     display: flex;
     flex-direction: row;
-    background-color: pink;
-    border: #AB5942;
-    border-radius: 10px;
+    flex: 3;
+}
+
+.levelContainer {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
 }
 
 .levelButton {
@@ -79,4 +85,10 @@ body {
     left: 75px;
     top: -11px;
     cursor: pointer;
+}
+
+.learn {
+    display: flex;
+    flex: 1;
+    padding-top: 30px;
 }
