@@ -8,6 +8,26 @@
         function onLoaded() {
             var yearLevel = getYearLevel();
             document.getElementById("yearlevel").innerHTML = "Year " + yearLevel;
+
+            // Display PB for each level
+            displayPB("Level1PB", yearLevel, 1);
+            displayPB("Level2PB", yearLevel, 2);
+            displayPB("Level3PB", yearLevel, 3);
+            displayPB("Level4PB", yearLevel, 4);
+            displayPB("Level5PB", yearLevel, 5);
+            displayPB("Level6PB", yearLevel, 6);
+            displayPB("Level7PB", yearLevel, 7);
+            displayPB("Level8PB", yearLevel, 8);
+        }
+
+        function displayPB(elementId, year, level) {
+            var PB = parseInt(getPB(year, level));
+
+            console.log("PB for year: " + year + " level " + level + " = " + PB)
+
+            if (PB) {
+                document.getElementById(elementId).innerHTML = "PB: " + pad(parseInt(PB / 60)) + ":" + pad(PB % 60);
+            }
         }
 
         function arrowButtonClicked(button) {
@@ -43,44 +63,44 @@
             <div class="levelContainer">
                 <img src="../images/Level 1.png" alt="Select level 1" class="levelButton" id="1"
                     onclick="levelButtonClicked(this);">
-                <label>PB: 1:23</label>
+                <label id="Level1PB">No PB set</label>
             </div>
             <div class="levelContainer">
                 <img src="../images/Level 2.png" alt="Select level 2" class="levelButton" id="2"
                     onclick="levelButtonClicked(this);">
-                <label>PB: 1:23</label>
+                <label id="Level2PB">No PB set</label>
             </div>
             <div class="levelContainer">
                 <img src="../images/Level 3.png" alt="Select level 3" class="levelButton" id="3"
                     onclick="levelButtonClicked(this);">
-                <label>PB: 1:23</label>
+                <label id="Level3PB">No PB set</label>
             </div>
             <div class="levelContainer">
                 <img src="../images/Level 4.png" alt="Select level 4" class="levelButton" id="4"
                     onclick="levelButtonClicked(this);">
-                <label>PB: 1:23</label>
+                <label id="Level4PB">No PB set</label>
             </div>
         </div>
         <div class="flexContainer">
             <div class="levelContainer">
                 <img src="../images/Level 5.png" alt="Select level 5" class="levelButton" id="5"
                     onclick="levelButtonClicked(this);">
-                <label>PB: 1:23</label>
+                <label id="Level5PB">No PB set</label>
             </div>
             <div class="levelContainer">
                 <img src="../images/Level 6.png" alt="Select level 6" class="levelButton" id="6"
                     onclick="levelButtonClicked(this);">
-                <label>PB: 1:23</label>
+                <label id="Level6PB">No PB set/label>
             </div>
             <div class="levelContainer">
                 <img src="../images/Level 7.png" alt="Select level 7" class="levelButton" id="7"
                     onclick="levelButtonClicked(this);">
-                <label>PB: 1:23</label>
+                <label id="Level7PB">No PB set</label>
             </div>
             <div class="levelContainer">
                 <img src="../images/Level 8.png" alt="Select level 8" class="levelButton" id="8"
                     onclick="levelButtonClicked(this);">
-                <label>PB: 1:23</label>
+                <label id="Level8PB">No PB set</label>
             </div>
         </div>
 

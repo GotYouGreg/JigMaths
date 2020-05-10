@@ -2,6 +2,17 @@
 // Helper Functions
 //
 
+
+function pad(val) {
+    var valString = val + "";
+    if (valString.length < 2) {
+        return "0" + valString;
+    }
+    else {
+        return valString;
+    }
+}
+
 // Get the year level from local storage
 function getYearLevel() {
     return localStorage.getItem('yearLevel')
