@@ -9,6 +9,14 @@
         function onLoaded() {
             var yearLevel = getYearLevel();
             //alert("Year Level: " + yearLevel);
+
+            var newPB = getNewPB();
+            if (newPB == "true") {
+
+                console.log("A new PB");
+
+                document.getElementById("congrats").innerHTML = "CONGRATULATIONS, New PB!!!"
+            }
         }
 
         function ContinueButtonClicked(button) {
@@ -21,15 +29,15 @@
 <body class="body" onload="onLoaded()">
 
     <div class="year6">
-        <img src="../images/Continuebutton.png" alt="Continue" class="Continue" style="width:100%" onclick="ContinueButtonClicked(this);">
+        <img src="../images/Continuebutton.png" alt="Continue" class="Continue" style="width:100%"
+            onclick="ContinueButtonClicked(this);">
     </div>
 
     <div class="title">
-        <div class="titletext">
+        <div id="congrats" class="titletext">
             CONGRATULATIONS!!!
         </div>
     </div>
-
 
 </body>
 

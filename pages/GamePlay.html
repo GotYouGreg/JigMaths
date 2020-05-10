@@ -152,6 +152,18 @@
                 // Store the latest result
                 storeLatestResult(totalSeconds);
 
+                // Update PB if it is better
+                var currentPB = getPB(year, level);
+                console.log (currentPB)
+                if (!currentPB || (parseInt(currentPB) > totalSeconds)) {
+                    console.log ("NEW PB")
+                    // New PB
+                    storePB(year, level, totalSeconds);
+                    storeNewPB(true);
+                } else {
+                    storeNewPB(false);
+                }
+
                 // remove the class after the animation completes
                 setTimeout(function () {
                     puzzle.classList.remove('puzzleDone');

@@ -33,13 +33,13 @@ function storeLatestResult(latestResult) {
 }
 
 // Get PB
-function getPB() {
-    return localStorage.getItem('PB')
+function getPB(yearLevel, level) {
+    return localStorage.getItem(yearLevel + "." + level + '.PB')
 }
 
 // Store PB
-function storePB(PB) {
-    return setItem.setItem('PB', PB)
+function storePB(yearLevel, level, PB) {
+    return localStorage.setItem(yearLevel + "." + level + '.PB', PB)
 }
 
 // Get the selected puzzle Id
@@ -51,3 +51,13 @@ function getSelectedPuzzle() {
 function storeSelectedPuzzle(puzzleId) {
     localStorage.setItem('selectedPuzzle', puzzleId);
 } 
+
+// Store the level in local storage
+function storeNewPB(newPB) {
+    localStorage.setItem('newPB', newPB);
+} 
+
+// Get latest Result
+function getNewPB() {
+    return localStorage.getItem('newPB')
+}
