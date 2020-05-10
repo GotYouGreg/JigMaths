@@ -7,20 +7,29 @@
     <script>
 
         function onLoaded() {
-            var yearLevel = getYearLevel();
-            //alert("Year Level: " + yearLevel);
+            var year = getYearLevel();
+            var level = getLevel();
 
             var newPB = getNewPB();
             if (newPB == "true") {
+                var PB = parseInt(getPB(year, level));
 
-                console.log("A new PB");
-
-                document.getElementById("congrats").innerHTML = "CONGRATULATIONS, New PB!!!"
+                document.getElementById("congrats").innerHTML = "Congratulations, you set a new PB of " + pad(parseInt(PB / 60)) + ":" + pad(PB % 60) + "!!!"
             }
         }
 
         function ContinueButtonClicked(button) {
             window.location.href = "./LevelSelector.html";
+        }
+
+        function pad(val) {
+            var valString = val + "";
+            if (valString.length < 2) {
+                return "0" + valString;
+            }
+            else {
+                return valString;
+            }
         }
 
     </script>
@@ -31,7 +40,7 @@
     <div class="container">
         <div class="title">
             <div id="congrats" class="titletext">
-                CONGRATULATIONS!!!
+                Congratulations. You completed the puzzle.
             </div>
         </div>
         <div class="year6">
