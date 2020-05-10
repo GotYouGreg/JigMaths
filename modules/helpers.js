@@ -42,12 +42,12 @@ function storePB(PB) {
     return setItem.setItem('PB', PB)
 }
 
-// Get the puzzle image from local storage
-function getPuzzleImage() {
-    return localStorage.getItem('puzzleImage')
+// Get the selected puzzle Id
+function getSelectedPuzzle() {
+    return localStorage.getItem('selectedPuzzle')
 }
 
-// Store the puzzle image in local storage
-function storePuzzleImage(puzzleImage) {
-    localStorage.setItem('puzzleImage', puzzleImage);
+// Store the selected puzzled Id
+function storeSelectedPuzzle(puzzleId) {
+    localStorage.setItem('selectedPuzzle', puzzleId);
 } 
