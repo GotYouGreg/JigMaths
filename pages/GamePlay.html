@@ -1,23 +1,186 @@
 <html>
 
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="./GamePlay.css">
     <script type="text/javascript" src="../modules/helpers.js"></script>
+    <script type="text/javascript" src="../modules/puzzleImages.js"></script>
     <script>
+
+        // ----------------------------------------------
         // Global variables
+        // ----------------------------------------------
+
+        // Set when a piece is dragged
+        var draggedItem;
+        var draggedImage;
+
+        // User to to build equations
         var lastEquationVal1 = 0;
         var lastEquationVal2 = 0;
         var lastEquationOperator = "";
-        var year = getYearLevel();
+
+        // The user's current level
+        var year = getYearLevel();;
         var level = getLevel();
 
+        // How many seconds the user has been doing the puzzle
+        var totalSeconds = 0;
+
+        // The number of rows and columns for user's grade and level
+        var numberOfRows = 0;
+        var numberOfColumns = 0;
+
+        // Size of the pieces
+        var slotWidth = 0;
+        var slotHeight = 0;
+
+        // Array of the pieces
+        var allPieces = [];
+
+        // Current piece use is up to
+        var currentPiece = 0;
+
+        // Has user finished puzzle
+        var puzzleDone = false;
+
+        // selected puzzle image -- ToDo: Fix this to get from storage
+        var selectPuzzle = parseInt(getSelectedPuzzle());
+
+        // Runs when the page load
         function onLoad() {
             // Generate initail equation
             document.getElementById("equation").innerHTML = generateEquation(year, level);
+
+            // Starte the timer
             setInterval(setTime, 1000);
+
+            // work out how many rows / columns for he puzzle
+            numberOfRows = getNumberOfRows(year, level);
+            numberOfColumns = getNumberOfColumns(year, level);
+
+            // work out how big each piece should be
+            var slotWidth = (getPuzzleImageWidth(selectPuzzle) / numberOfColumns);
+            var slotHeight = (getPuzzleImageHeight(selectPuzzle) / numberOfRows);
+
+            // Get elements for puzzle and pieces
+            let puzzleElement = document.getElementById("puzzle");
+            let piecesElement = document.getElementById("pieces");
+
+            // Add all the slots and pieces
+            var row;
+            for (row = 1; row <= numberOfRows; row++) {
+
+                // Add row to puzzle
+                let rowDiv = addRow(puzzleElement);
+
+                var column;
+                for (column = 1; column <= numberOfColumns; column++) {
+
+                    // Add slot in row
+                    addSlot(rowDiv, slotHeight, slotWidth, "slot." + row + "." + column, row, column);
+
+                    // Store piece in list of pieces
+                    addPiece(piecesElement, slotHeight, slotWidth, "piece." + row + "." + column, row, column);
+                }
+            }
+
+            // Shuffle the pieces
+            allPieces = shuffle(allPieces);
         }
 
+        // ----------------------------------------------
+        // Drag and drop
+        // ----------------------------------------------
+        function dragstart_handler(ev) {
+            // Add the target element's id to the data transfer object
+            ev.dataTransfer.setData("text/plain", ev.target.id);
+
+            // Record which item is being dragged
+            draggedItem = ev.target.id;
+            draggedImage = ev.target.style.background;
+
+            console.log("Dragged piece: " + draggedItem);
+        }
+
+        function dragover_handler(ev) {
+
+            if (draggedItem) {
+                // Record which item is being dragged
+                let slot = ev.target.id;
+
+                let draggedPieceId = draggedItem.substring(6);
+                let slotId = slot.substring(5);
+
+                if (draggedPieceId == slotId) {
+                    ev.currentTarget.style.opacity = 0.25;
+                    ev.preventDefault();
+                }
+            }
+        }
+
+        function dragleave_handler(ev) {
+            let slot = ev.target.id;
+
+            // If background colour has not changed
+            if (ev.currentTarget.style.opacity == 0.25) {
+                // Change color of slot back after leaving area
+                ev.currentTarget.style.opacity = 0.5;
+            }
+        }
+
+        function drop_handler(ev) {
+            // console.log("Drop");
+            ev.preventDefault();
+
+            // Highlight dropped slot - ToDo: needs to display piece image
+            ev.currentTarget.style.background = draggedImage;
+            ev.currentTarget.style.opacity = 1;
+
+            // Hide the puzzle piece
+            document.getElementById(draggedItem).style.display = "none";
+
+            let puzzle = document.getElementById("puzzle");
+
+            if (currentPiece == allPieces.length) {
+                // Finished the puzzle
+                // Animate the puzzle to celebrate
+                puzzle.classList.add('puzzleDone');
+
+                // Stop timer
+                puzzleDone = true;
+
+                // Store the latest result
+                storeLatestResult(totalSeconds);
+
+                // Update PB if it is better
+                var currentPB = getPB(year, level);
+                console.log (currentPB)
+                if (!currentPB || (parseInt(currentPB) > totalSeconds)) {
+                    console.log ("NEW PB")
+                    // New PB
+                    storePB(year, level, totalSeconds);
+                    storeNewPB(true);
+                } else {
+                    storeNewPB(false);
+                }
+
+                // remove the class after the animation completes
+                setTimeout(function () {
+                    puzzle.classList.remove('puzzleDone');
+                    // Show Congrats page
+                    window.location.assign("./Congrats.html");
+                    console.log("Navigate to cograts")
+                }, 2000);
+            } else {
+                // Not finished
+                document.getElementById("answer").focus();
+                document.getElementById("answer").select();
+            }
+        }
+
+        // ----------------------------------------------
+        // Buttons
+        // ----------------------------------------------
         function arrowButtonClicked(button) {
             window.location.href = "../pages/LevelSelector.html";
         }
@@ -26,49 +189,30 @@
             window.location.href = "../pages/GamePlay.html";
         }
 
-        function CheckAnswer() {
-            var val1 = parseInt(lastEquationVal1);
-            var val2 = parseInt(lastEquationVal2);
-            var correctAnswer = 0;
-
-            if (lastEquationOperator == "+") {
-                correctAnswer = val1 + val2;
-            } else if (lastEquationOperator == "-") {
-                correctAnswer = val1 - val2;
-            } else if (lastEquationOperator == "x") {
-                correctAnswer = val1 * val2;
-            } else {
-                correctAnswer = val1 / val2;
-            }
-
-            var userAnswer = parseInt(document.getElementById("answer").value);
-
-            if (userAnswer == correctAnswer) {
-                //alert("Correct answer");
-                // Clear answer
-                document.getElementById("answer").value = "";
-                // Generate new equation
-                document.getElementById("equation").innerHTML = generateEquation(year, level);
-            } else {
-                // Add a class that defines an animation
-                var answer = document.getElementById('answer');
-                answer.classList.add('error');
-
-                // remove the class after the animation completes
-                setTimeout(function () {
-                    answer.classList.remove('error');
-                }, 300);
-
-                document.getElementById("answer").select();
+        // ----------------------------------------------
+        // Timer
+        // ----------------------------------------------
+        function setTime() {
+            if (!puzzleDone) {
+                ++totalSeconds;
+                document.getElementById("seconds").innerHTML = pad(totalSeconds % 60);
+                document.getElementById("minutes").innerHTML = pad(parseInt(totalSeconds / 60));
             }
         }
 
-        function checkEnterKey(event, field) {
-            if (event.keyCode === 13) {
-                CheckAnswer();
+        function pad(val) {
+            var valString = val + "";
+            if (valString.length < 2) {
+                return "0" + valString;
+            }
+            else {
+                return valString;
             }
         }
 
+        // ----------------------------------------------
+        // Create equations
+        // ----------------------------------------------
         function generateEquation(year, level) {
             // Set global variables - used in check answer
             lastEquationOperator = getEquationType(year);
@@ -93,6 +237,7 @@
             var selector = Math.floor(maxEquationSelect * Math.random());
             return equationTypes[selector];
         }
+
 
         var maxValAddSubtractYear4 = [10, 20, 30, 40, 50, 60, 70, 80];
         var maxValAddSubtractYear5 = [80, 100, 120, 140, 150, 160, 180, 200];
@@ -125,55 +270,191 @@
             return value;
         }
 
-        // Timer
-        var totalSeconds = 0;
+        // ----------------------------------------------
+        // Check user's answer
+        // ----------------------------------------------
+        function CheckAnswer() {
+            var val1 = parseInt(lastEquationVal1);
+            var val2 = parseInt(lastEquationVal2);
+            var correctAnswer = 0;
 
-        function setTime() {
-            ++totalSeconds;
-            document.getElementById("seconds").innerHTML = pad(totalSeconds % 60);
-            document.getElementById("minutes").innerHTML = pad(parseInt(totalSeconds / 60));
+            if (lastEquationOperator == "+") {
+                correctAnswer = val1 + val2;
+            } else if (lastEquationOperator == "-") {
+                correctAnswer = val1 - val2;
+            } else if (lastEquationOperator == "x") {
+                correctAnswer = val1 * val2;
+            } else {
+                correctAnswer = val1 / val2;
+            }
+
+            var userAnswer = parseInt(document.getElementById("answer").value);
+
+            if (userAnswer == correctAnswer) {
+                // Clear answer
+                document.getElementById("answer").value = "";
+
+                // Generate new equation
+                document.getElementById("equation").innerHTML = generateEquation(year, level);
+
+                allPieces[currentPiece++].style.visibility = "visible";
+                document.activeElement.blur();
+            } else {
+                // Add a class that defines an animation
+                var answer = document.getElementById('answer');
+                answer.classList.add('error');
+
+                // remove the class after the animation completes
+                setTimeout(function () {
+                    answer.classList.remove('error');
+                }, 300);
+            }
         }
 
-        function pad(val) {
-            var valString = val + "";
-            if (valString.length < 2) {
-                return "0" + valString;
-            }
-            else {
-                return valString;
+        function checkEnterKey(event, field) {
+            if (event.keyCode === 13) {
+                CheckAnswer();
             }
         }
+
+        // ----------------------------------------------
+        // Work out how many rows and columns is puzzle for user
+        // ----------------------------------------------
+        var maxRowsYear4 = [2, 3, 3, 3, 4, 4, 4, 4];
+        var maxRowsYear5 = [5, 5, 5, 5, 6, 6, 6, 6];
+        var maxRowsYear6 = [7, 7, 7, 7, 8, 8, 8, 8];
+
+        function getNumberOfRows(year, level) {
+
+            if (year == 4) {
+                return maxRowsYear4[level - 1];
+            } else if (year == 5) {
+                return maxRowsYear5[level - 1];
+            } else {
+                return maxRowsYear6[level - 1];
+            }
+            return maxRow;
+        }
+
+        var maxColumnsYear4 = [2, 8, 8, 8, 9, 9, 9, 9];
+        var maxColumnsYear5 = [10, 10, 10, 10, 11, 11, 11, 11];
+        var maxColumnsYear6 = [12, 12, 12, 12, 13, 13, 13, 13];
+
+        function getNumberOfColumns(year, level) {
+            let maxColumn = 0;
+
+            if (year == 4) {
+                return maxColumnsYear4[level - 1];
+            } else if (year == 5) {
+                return maxColumnsYear[level - 1];
+            } else {
+                return maxColumnsYear6[level - 1];
+            }
+            return maxColumn;
+        }
+
+        // ----------------------------------------------
+        // Create the puzzle
+        // ----------------------------------------------
+        function addRow(puzzleElement) {
+            //alert("Added Row");
+            let rowDiv = document.createElement("div");
+            puzzleElement.appendChild(rowDiv);
+            rowDiv.classList.add("puzzleRow")
+            return rowDiv;
+        }
+
+        function addSlot(rowElement, slotHeight, slotWidth, slotId, row, column) {
+            let slotDiv = document.createElement("div");
+            rowElement.appendChild(slotDiv);
+            slotDiv.classList.add("puzzleSlot");
+            slotDiv.id = slotId;
+
+            slotDiv.style.width = slotWidth.toString() + "px";
+            slotDiv.style.height = slotHeight.toString() + "px";
+
+            slotDiv.addEventListener("drop", drop_handler);
+            slotDiv.addEventListener("dragover", dragover_handler);
+            slotDiv.addEventListener("dragleave", dragleave_handler);
+
+            let imageX = Math.floor(-slotWidth * (column - 1));
+            let imageY = Math.floor(-slotHeight * (row - 1));
+            slotDiv.style.background = "url(" + getPuzzleImage(selectPuzzle) + ") " + imageX + "px " + imageY + "px";
+
+            return slotDiv;
+        }
+
+        function addPiece(piecesElement, slotHeight, slotWidth, pieceId, row, column) {
+            let pieceDiv = document.createElement("div");
+            piecesElement.appendChild(pieceDiv);
+            pieceDiv.classList.add("piece");
+            pieceDiv.id = pieceId;
+
+            pieceDiv.style.width = slotWidth.toString() + "px";
+            pieceDiv.style.height = slotHeight.toString() + "px";
+            pieceDiv.style.left = Math.random() * getPuzzleImageWidth(selectPuzzle) + 18
+
+            pieceDiv.addEventListener("dragstart", dragstart_handler);
+            pieceDiv.draggable = true;
+
+            let imageX = Math.floor(-slotWidth * (column - 1));
+            let imageY = Math.floor(-slotHeight * (row - 1));
+            pieceDiv.style.background = "url(" + getPuzzleImage(selectPuzzle) + ") " + imageX + "px " + imageY + "px";
+
+            allPieces.push(pieceDiv);
+        }
+
+        //---------------------------------------------------
+        // Shuffle the pieces
+        // From: https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
+        //---------------------------------------------------
+        function shuffle(array) {
+            var currentIndex = array.length, temporaryValue, randomIndex;
+
+            // While there remain elements to shuffle...
+            while (0 !== currentIndex) {
+
+                // Pick a remaining element...
+                randomIndex = Math.floor(Math.random() * currentIndex);
+                currentIndex -= 1;
+
+                // And swap it with the current element.
+                temporaryValue = array[currentIndex];
+                array[currentIndex] = array[randomIndex];
+                array[randomIndex] = temporaryValue;
+            }
+
+            return array;
+        }
+
 
     </script>
 </head>
 
 <body class="body" onload="onLoad()">
 
-    <div class="gamePlay">
-        <div id="gamePlay" class="gamePlayText">
-            Game Play
+    <div class="container">
+        <div id="header" class="header">
+            <img src="../images/Arrow.png" alt="Back" class="backButton" id="1" onclick="arrowButtonClicked(this);">
+            <div class="timer">
+                <label id="minutes">00</label>:<label id="seconds">00</label>
+            </div>
+            <img src="../images/Redo button.png" alt="Redo" class="reset" id="1" onclick="RedoButtonClicked(this);">
+        </div>
+        <div id="puzzle" class="puzzle">
+        </div>
+        <div id="pieces" class="pieces">
+        </div>
+
+        <div class="qanda">
+            <div class="formula">
+                <label id="equation" class="equation"></label>
+                <input type="number" id="answer" class="answer" autofocus="autofocus"
+                    onkeypress="checkEnterKey(event, this)">
+                <button type="button" onclick="CheckAnswer()" class="check">Submit</button>
+            </div>
         </div>
     </div>
-
-    <div class="selectorContainer">
-        <div class="flexContainer">
-            <img src="../images/Tray.png" alt="GameTray" class="tray">
-            <img src="../images/Arrow.png" alt="Back" class="arrowButton" id="1" onclick="arrowButtonClicked(this);">
-            <img src="../images/Redo button.png" alt="Redo" class="RedoButton" id="1"
-                onclick="RedoButtonClicked(this);">
-        </div>
-    </div>
-
-    <div class="qanda">
-        <label id="equation"></label>
-        <input type="number" id="answer" class="answer" autofocus="autofocus" onkeypress="checkEnterKey(event, this)">
-        <button type="button" onclick="CheckAnswer()" class="check">Submit</button>
-    </div>
-
-    <div>
-        <label id="minutes">00</label>:<label id="seconds">00</label>
-    </div>
-
 </body>
 
 </html>

@@ -22,12 +22,42 @@ function storeLevel(level) {
     localStorage.setItem('level', level);
 } 
 
-// Get the puzzle image from local storage
-function getPuzzleImage() {
-    return localStorage.getItem('puzzleImage')
+// Get latest Result
+function getLatestResult() {
+    return localStorage.getItem('latestResult')
 }
 
-// Store the puzzle image in local storage
-function storePuzzleImage(puzzleImage) {
-    localStorage.setItem('puzzleImage', puzzleImage);
+// Store Latest Result
+function storeLatestResult(latestResult) {
+    localStorage.setItem('latestResult', latestResult)
+}
+
+// Get PB
+function getPB(yearLevel, level) {
+    return localStorage.getItem(yearLevel + "." + level + '.PB')
+}
+
+// Store PB
+function storePB(yearLevel, level, PB) {
+    return localStorage.setItem(yearLevel + "." + level + '.PB', PB)
+}
+
+// Get the selected puzzle Id
+function getSelectedPuzzle() {
+    return localStorage.getItem('selectedPuzzle')
+}
+
+// Store the selected puzzled Id
+function storeSelectedPuzzle(puzzleId) {
+    localStorage.setItem('selectedPuzzle', puzzleId);
 } 
+
+// Store the level in local storage
+function storeNewPB(newPB) {
+    localStorage.setItem('newPB', newPB);
+} 
+
+// Get latest Result
+function getNewPB() {
+    return localStorage.getItem('newPB')
+}

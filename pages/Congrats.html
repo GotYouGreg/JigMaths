@@ -1,0 +1,44 @@
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="./Congrats.css">
+    <script type="text/javascript" src="../modules/helpers.js"></script>
+    <script>
+
+        function onLoaded() {
+            var yearLevel = getYearLevel();
+            //alert("Year Level: " + yearLevel);
+
+            var newPB = getNewPB();
+            if (newPB == "true") {
+
+                console.log("A new PB");
+
+                document.getElementById("congrats").innerHTML = "CONGRATULATIONS, New PB!!!"
+            }
+        }
+
+        function ContinueButtonClicked(button) {
+            window.location.href = "./LevelSelector.html";
+        }
+
+    </script>
+</head>
+
+<body class="body" onload="onLoaded()">
+
+    <div class="year6">
+        <img src="../images/Continuebutton.png" alt="Continue" class="Continue" style="width:100%"
+            onclick="ContinueButtonClicked(this);">
+    </div>
+
+    <div class="title">
+        <div id="congrats" class="titletext">
+            CONGRATULATIONS!!!
+        </div>
+    </div>
+
+</body>
+
+</html>

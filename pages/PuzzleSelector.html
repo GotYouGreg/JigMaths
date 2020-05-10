@@ -4,20 +4,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="./PuzzleSelector.css">
     <script type="text/javascript" src="../modules/helpers.js"></script>
+    <script type="text/javascript" src="../modules/puzzleimages.js"></script>
     <script>
+        var selectPuzzleImage = "";
+
         function onLoaded() {
             var yearLevel = getYearLevel();
             var level = getLevel();
             // ToDo: Display different puzzles for different years?
+            var selectPuzzleImage = getPuzzleImage(2); 
         }
 
         function puzzleButtonClicked(button) {
-            storePuzzleImage(button.id);
+            storeSelectedPuzzle(button.id);
             window.location.href = "../pages/GamePlay.html";
-        }
-
-        function uploadPhotoButtonClicked(button) {
-            window.location.href = "../pages/uploadPhoto.html";
         }
 
         function arrowButtonClicked(button) {
@@ -39,16 +39,16 @@
 
     <div class="selectorContainer">
         <div class="flexContainer">
-            <img src="../images/Minecraft image.png" alt="Minecraft Puzzle" class="levelButton" id="Minecraft" onclick="puzzleButtonClicked(this);">
-            <img src="../images/Level 2.png" alt="Select level 2" class="levelButton" id="2" onclick="puzzleButtonClicked(this);">
-            <img src="../images/Level 3.png" alt="Select level 3" class="levelButton" id="3" onclick="puzzleButtonClicked(this);">
-            <img src="../images/Level 4.png" alt="Select level 4" class="levelButton" id="4" onclick="puzzleButtonClicked(this);">
+            <img src="../puzzleImages/unicornio.jpg" alt="Select level 2" class="levelButton" id="0" onclick="puzzleButtonClicked(this);">
+            <img src="../puzzleImages/minecraft.jpg" alt="Select level 1" class="levelButton" id="1" onclick="puzzleButtonClicked(this);">
+            <img src="../puzzleImages/dog.jpg" alt="Select level 3" class="levelButton" id="2" onclick="puzzleButtonClicked(this);">
+            <img src="../puzzleImages/painting.jpg" alt="Select level 4" class="levelButton" id="3" onclick="puzzleButtonClicked(this);">
         </div>
         <div class="flexContainer">
-            <img src="../images/Level 5.png" alt="Select level 5" class="levelButton" id="5" onclick="puzzleButtonClicked(this);">
-            <img src="../images/Level 6.png" alt="Select level 6" class="levelButton" id="6" onclick="puzzleButtonClicked(this);">
-            <img src="../images/Level 7.png" alt="Select level 7" class="levelButton" id="" onclick="puzzleButtonClicked(this);">
-            <img src="../images/Add image.png" alt="Select level 8" class="levelButton" id="8" onclick="uploadPhotoButtonClicked(this);">
+            <img src="../puzzleImages/popStar.jpg" alt="Select level 5" class="levelButton" id="4" onclick="puzzleButtonClicked(this);">
+            <img src="../puzzleImages/ironMan.jpeg" alt="Select level 6" class="levelButton" id="5" onclick="puzzleButtonClicked(this);">
+            <img src="../puzzleImages/instrument.jpeg" alt="Select level 7" class="levelButton" id="6" onclick="puzzleButtonClicked(this);">
+            <img src="../puzzleImages/sportsBalls.jpg" alt="Select level 8" class="levelButton" id="7" onclick="puzzleButtonClicked(this);">
         </div>
         <div id="title" class="titletext">
             Select Level
