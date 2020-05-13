@@ -6,6 +6,8 @@
     <script type="text/javascript" src="../modules/helpers.js"></script>
     <script>
         function onLoaded() {
+
+            // Get and display the users year level
             var yearLevel = getYearLevel();
             document.getElementById("yearlevel").innerHTML = "Year " + yearLevel;
 
@@ -20,36 +22,38 @@
             displayPB("Level8PB", yearLevel, 8);
         }
 
+        // Display a single PB
         function displayPB(elementId, year, level) {
+            // Gets PB for particular year and level
             var PB = parseInt(getPB(year, level));
-
-            console.log("PB for year: " + year + " level " + level + " = " + PB)
-
+            // If their is a PB display it
             if (PB) {
                 document.getElementById(elementId).innerHTML = "PB: " + pad(parseInt(PB / 60)) + ":" + pad(PB % 60);
             }
         }
 
+        // Goes to Home page
         function arrowButtonClicked(button) {
             window.location.href = "../index.html";
         }
 
+        // User selcts level
         function levelButtonClicked(button) {
+            // Record level that the user picked
             storeLevel(button.id);
+            // GO to the puzzle selector page
             window.location.href = "../pages/PuzzleSelector.html";
         }
 
+        // Learn Button Clicked
         function learnButtonClicked(button) {
+            // Show learn page
             window.location.href = "../pages/LearnPage.html";
         }
     </script>
 </head>
 
 <body class="body" onload="onLoaded()">
-
-
-
-
     <div class="selectorContainer">
         <div class="yearlevel">
             <div id="yearlevel" class="yearleveltext">
@@ -59,7 +63,7 @@
         <div id="title" class="titletext">
             Select Level
         </div>
-<img src="../images/Arrow.png" alt="Back" class="arrowButton" id="1" onclick="arrowButtonClicked(this);">
+        <img src="../images/Arrow.png" alt="Back" class="arrowButton" id="1" onclick="arrowButtonClicked(this);">
         <div class="flexContainer">
             <div class="levelContainer">
                 <img src="../images/Level 1.png" alt="Select level 1" class="levelButton" id="1"

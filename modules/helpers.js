@@ -2,7 +2,8 @@
 // Helper Functions
 //
 
-
+// Leading zeros for seconds / minutes
+// Sourced from https://stackoverflow.com/questions/5517597/plain-count-up-timer-in-javascript
 function pad(val) {
     var valString = val + "";
     if (valString.length < 2) {

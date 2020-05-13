@@ -10,6 +10,7 @@
             var year = getYearLevel();
             var level = getLevel();
 
+            // If new PB is set, display congrats
             var newPB = getNewPB();
             if (newPB == "true") {
                 var PB = parseInt(getPB(year, level));
@@ -18,6 +19,7 @@
             }
         }
 
+        // Continue button takes user to Level Sector to try another level
         function ContinueButtonClicked(button) {
             window.location.href = "./LevelSelector.html";
         }

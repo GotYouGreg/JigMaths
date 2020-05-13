@@ -1,4 +1,7 @@
-// Puzzle Images
+//
+// List of puzzle Images
+// In future, stored in DB on server, allow more image options 
+// and allow users to use their own images
 var puzzleImages =
 [
     ["../puzzleImages/unicornio.jpg", 762, 572],
@@ -11,14 +14,17 @@ var puzzleImages =
     ["../puzzleImages/sportsBalls.jpg", 762, 381],
 ]
 
+// Get image for a puzzle
 function getPuzzleImage(selectedPuzzle) {
     return puzzleImages[selectedPuzzle][0];
 }
 
+// Get width for a puzzle
 function getPuzzleImageWidth(selectedPuzzle) {
     return puzzleImages[selectedPuzzle][1];
 }
 
+// Gets height for a puzzle
 function getPuzzleImageHeight(selectedPuzzle) {
     return puzzleImages[selectedPuzzle][2];
 }
